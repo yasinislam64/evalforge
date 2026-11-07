@@ -54,7 +54,7 @@ class RunResult:
 def make_judge(provider: Provider) -> JudgeFn:
     async def judge(case_input: str, output: str, rubric: str) -> tuple[bool, str]:
         prompt = JUDGE_PROMPT.format(input=case_input, output=output, rubric=rubric)
-        reply = await provider.complete("You are a strict, fair grader.", prompt, temperature=0.0, max_tokens=100)
+        reply = await provider.complete("You are a strict, fair grader.", prompt, temperature=0.0, max_tokens=4000)  # room for adaptive thinking before the verdict
         return parse_judge_verdict(reply.text)
 
     return judge

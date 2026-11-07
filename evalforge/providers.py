@@ -37,7 +37,9 @@ class AnthropicProvider:
                     model=self.name,
                     system=system,
                     max_tokens=max_tokens,
-                    temperature=temperature,
+                    # Current Claude models and API versions reject sampling params
+                    # (temperature/top_p/top_k), so `temperature` is accepted for
+                    # provider-interface compatibility but not sent.
                     messages=[{"role": "user", "content": prompt}],
                 )
                 text = "".join(b.text for b in msg.content if b.type == "text")
