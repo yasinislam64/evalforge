@@ -1,0 +1,24 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "evalforge"
+version = "0.1.0"
+description = "Regression testing for LLM prompts: YAML test suites, deterministic and LLM-as-judge scoring, CI gates."
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = ["anthropic>=0.40", "pyyaml>=6"]
+
+[project.optional-dependencies]
+dev = ["pytest>=8", "pytest-asyncio>=0.23"]
+
+[project.scripts]
+evalforge = "evalforge.cli:main"
+
+[tool.setuptools]
+packages = ["evalforge"]
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+testpaths = ["tests"]
